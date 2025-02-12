@@ -7,6 +7,7 @@ from PIL import Image, ImageTk
 
 app = Flask(__name__)
 
+# function to display the image and shutdown
 def display_image_and_shutdown():
     window = tk.Toplevel(root)
     window.title("Shutdown Warning")
@@ -16,8 +17,7 @@ def display_image_and_shutdown():
     window.resizable(False, False)
     
     try:
-        # Open the image using Pillow
-        img = Image.open("logo.png")  # Ensure "logo.png" is in the same directory
+        img = Image.open("logo.png")
 
         # Get screen dimensions
         screen_width = window.winfo_screenwidth()
@@ -41,8 +41,11 @@ def display_image_and_shutdown():
                            font=("Arial", 24), fg="white", bg="black")
         message.pack(pady=20)
 
+        #Check if the host OS is windows
         if sys.platform == "win32":
             os.system("shutdown /s /t 000")
+        else:
+            os.system("shutdown now")
 
     except Exception as e:
         print(f"Error displaying image: {str(e)}")
@@ -58,17 +61,15 @@ def trigger_shutdown():
     return "Shutdown has been triggered. Please wait while the image is displayed."
 
 def run_flask():
-    """ Run Flask in a separate thread """
+    # Run Flask in a separate thread
     app.run(debug=True, host="0.0.0.0", port=5000, use_reloader=False)
 
 if __name__ == '__main__':
-    # Create the Tkinter root window
     root = tk.Tk()
-    root.withdraw()  # Hide the root window
+    root.withdraw()
 
     # Start Flask in a separate thread
     flask_thread = Thread(target=run_flask, daemon=True)
     flask_thread.start()
 
-    # Run Tkinter main loop in the main thread
     root.mainloop()
