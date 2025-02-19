@@ -52,7 +52,7 @@ def display_image_and_shutdown():
 
 @app.route('/')
 def home():
-    return "Welcome to the Flask Shutdown Server! Visit /trigger_shutdown to trigger shutdown."
+    return "Welcome to the Avict18 Shutdown Server! Visit /trigger_shutdown to trigger shutdown."
 
 @app.route('/trigger_shutdown')
 def trigger_shutdown():
