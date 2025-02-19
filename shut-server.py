@@ -4,10 +4,19 @@ import tkinter as tk
 from threading import Thread
 from flask import Flask
 from PIL import Image, ImageTk
+from datetime import datetime
 
 app = Flask(__name__)
 
-# function to display the image and shutdown
+# Function to calculate days remaining until May 5th
+def days_until_may_5():
+    today = datetime.today().date()
+    target_date = datetime(today.year, 5, 5).date()
+    if today > target_date:
+        target_date = datetime(today.year + 1, 5, 5).date()  # Use next year's May 5th if already passed
+    return (target_date - today).days
+
+# Function to display the image and shutdown
 def display_image_and_shutdown():
     window = tk.Toplevel(root)
     window.title("Shutdown Warning")
@@ -36,17 +45,20 @@ def display_image_and_shutdown():
         # Keep a reference to the image
         window.image = img_tk
 
+        # Calculate days remaining until May 5th
+        days_remaining = days_until_may_5()
+
         # Display a message on top of the background
-        message = tk.Label(window, text="Your computer is shutting down in a few seconds...", 
-                           font=("Arial", 24), fg="white", bg="black")
+        message_text = f"Your computer is shutting down in a few seconds...\nDays remaining until Necta: {days_remaining}"
+        message = tk.Label(window, text=message_text, font=("Arial", 24), fg="white", bg="black")
         message.pack(pady=20)
 
-        #Check if the host OS is windows
+        # Check if the host OS is Windows
         if sys.platform == "win32":
             os.system("shutdown /s /t 000")
         else:
             os.system("shutdown now")
-
+    
     except Exception as e:
         print(f"Error displaying image: {str(e)}")
 
