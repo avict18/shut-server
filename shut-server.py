@@ -49,7 +49,7 @@ def display_image_and_shutdown():
         days_remaining = days_until_may_5()
 
         # Display a message on top of the background
-        message_text = f"Your computer is shutting down in a few seconds...\nDays remaining until Necta: {days_remaining}"
+        message_text = f"Your computer is shutting down in a Moment...\nDays remaining until Necta: {days_remaining}"
         message = tk.Label(window, text=message_text, font=("Arial", 24), fg="white", bg="black")
         message.pack(pady=20)
 
