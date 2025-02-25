@@ -8,7 +8,7 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-# Function to calculate days remaining until May 5th
+# Function to calculate days remaining until May 5th when the F6 are doing ACSEE
 def days_until_may_5():
     today = datetime.today().date()
     target_date = datetime(today.year, 5, 5).date()
