@@ -70,7 +70,7 @@ def home():
 def trigger_shutdown():
     # Schedule the function in the main Tkinter thread
     root.after(0, display_image_and_shutdown)
-    return "Shutdown has been triggered. Please wait while the image is displayed."
+    return "Shutdown has been triggered. Please wait while the image is displayed and PC is shutdown."
 
 def run_flask():
     # Run Flask in a separate thread
